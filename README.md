@@ -1,3 +1,4 @@
+# BOT-CONTROL
 # 🚀 PAINEL BOT - OTIMIZADO
 
 **Uso rápido**
@@ -415,3 +416,6 @@ Use esta versão curta no topo do `README.md` quando quiser que a equipe veja ra
 **Data:** 20 de Fevereiro de 2026  
 **Versão:** 1.0 Otimizada  
 **Status:** ✅ Produção
+=======
+# BOT-CONTROL
+>>>>>>> 0ca1b881e149d52745208227def611468f3a38a0
