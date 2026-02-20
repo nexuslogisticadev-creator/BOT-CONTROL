@@ -184,12 +184,10 @@ Benchmark completo
 
 ---
 
-**Desenvolvido com ❤️ por GitHub Copilot**  
 **Data:** 20 de Fevereiro de 2026  
 **Versão:** 1.0 Otimizada  
 **Status:** ✅ Produção
 
-````
 ```python
 # ❌ Recarrega SEMPRE
 df = pd.read_excel(arq, sheet_name="EXTRATO DETALHADO")
