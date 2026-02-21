@@ -328,13 +328,18 @@ def requisicao_segura(payload):
     headers_completos = CONFIG.get('headers_api', {})
 
     try:
-        # USA CHROME 120 NA REDE (Impersonate)
+        # Parâmetros de requisição da API vindos do config
+        API_REQUEST = CONFIG.get('api_request', {})
+        impersonate_val = API_REQUEST.get('impersonate', None)
+        timeout_min = API_REQUEST.get('timeout_min', 12)
+        timeout_max = API_REQUEST.get('timeout_max', 18)
+        cookie_token_key = API_REQUEST.get('cookie_token_key', 'token')
         r = cffi_requests.post(
             URL_API,
             json=payload,
-            cookies={"seu_ze_access_token": TOKEN_ATUAL},
-            timeout=random.randint(12, 18),
-            impersonate="chrome120",
+            cookies={cookie_token_key: TOKEN_ATUAL},
+            timeout=random.randint(timeout_min, timeout_max),
+            impersonate=impersonate_val,
             headers=headers_completos
         )
         
