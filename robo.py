@@ -155,7 +155,7 @@ if CONFIG is None:
     input("Pressione Enter para sair...")
     exit()
 
-// ================= CONFIGURAÇÕES =================
+#// ================= CONFIGURAÇÕES =================
 URL_API = CONFIG['url_api']
 ENDERECO_LOJA = CONFIG['endereco_loja']
 NOME_GRUPO_FIXO = CONFIG['nome_grupo']
