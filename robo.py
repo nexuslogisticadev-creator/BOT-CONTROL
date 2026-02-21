@@ -155,8 +155,8 @@ if CONFIG is None:
     input("Pressione Enter para sair...")
     exit()
 
-# ================= CONFIGURAÇÕES =================
-URL_API = "https://seller-api.ze.delivery/graphql"
+// ================= CONFIGURAÇÕES =================
+URL_API = CONFIG['url_api']
 ENDERECO_LOJA = CONFIG['endereco_loja']
 NOME_GRUPO_FIXO = CONFIG['nome_grupo']
 
