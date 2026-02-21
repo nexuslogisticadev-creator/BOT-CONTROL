@@ -176,11 +176,13 @@ MOTOBOYS_API = CONFIG['motoboys']
 BAIRROS_VALORES = CONFIG['bairros']
 BAIRROS_NAO_CADASTRADOS_LOGADOS = set()
 
-# Carrega Telegram do config
 TELEGRAM_TOKEN = CONFIG['telegram_token']
 TELEGRAM_CHAT_ID = CONFIG['telegram_chat_id']
 DEBUG_ALERTA_RETIRADA_TODOS = CONFIG.get('debug_alerta_retirada_todos', False)
 ALERTA_RETIRADA_AUTO = CONFIG.get('alerta_retirada_auto', False)
+
+# Inicialização de variáveis globais de controle de tempo
+LAST_MAIN_REFRESH = time.time()
 
 STATUS_CANCELADOS_LISTA = [
     "ABANDONED", "CANCEL", "DEVOLVIDO", "POC_ABANDONED", 
@@ -1385,9 +1387,16 @@ def _reiniciar_chrome_se_preciso(motivo):
     try:
         if driver:
             try:
+                print("Tentando fechar aba ativa do Chrome...")
+                driver.close()
+            except Exception as e:
+                print(f"Aviso: erro ao fechar aba ativa: {e}")
+            try:
+                print("Tentando encerrar sessão do Chrome (driver.quit)...")
                 driver.quit()
-            except Exception:
-                pass
+                print("driver.quit() executado com sucesso.")
+            except Exception as e:
+                print(f"Aviso: erro ao encerrar sessão do Chrome: {e}")
         driver = None
         iniciar_chrome_persistente()
         LAST_CHROME_RESTART = agora
@@ -3345,4 +3354,18 @@ def start():
                 time.sleep(10)
 
 if __name__ == "__main__":
-    start()
+    import sys
+    manter_ativo = False
+    if len(sys.argv) > 1 and sys.argv[1] == "--painel":
+        manter_ativo = True
+
+    if manter_ativo:
+        while True:
+            try:
+                start()
+            except Exception as e:
+                print(f"Erro crítico no robô: {e}")
+                print("Reiniciando robô em 5 segundos...")
+                time.sleep(5)
+    else:
+        start()
