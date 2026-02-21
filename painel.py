@@ -325,6 +325,10 @@ class PainelUltra(ctk.CTk):
         self.cache_monitor_mtime = None
         self.search_after_id = None
         self.log_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "robo.log")
+        # Garante que o arquivo de log existe para evitar FileNotFoundError
+        if not os.path.exists(self.log_file_path):
+            with open(self.log_file_path, "w", encoding="utf-8") as f:
+                f.write("")
         self.log_tail_running = False
         self._log_buffer = deque(maxlen=2000)
 
